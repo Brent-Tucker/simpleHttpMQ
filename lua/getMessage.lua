@@ -1,13 +1,15 @@
 local redis = require "resty.redis"
 local red = redis:new()
 
+local config = require("lua.appConfig")
+
 red:set_timeout(1000) -- 1 sec
 
 -- or connect to a unix domain socket file listened
 -- by a redis server:
 --     local ok, err = red:connect("unix:/path/to/redis.sock")
 
-local ok, err = red:connect("127.0.0.1", 6379)
+local ok, err = red:connect(config["redis_host"], config["redis_port"])
 if not ok then
    -- ngx.say("failed to connect: ", err)
 	returnResult["errorCode"] = "01"
