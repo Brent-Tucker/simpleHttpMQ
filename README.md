@@ -6,11 +6,12 @@
 
 2. Redis has been installed and without authentication settings.
 
+
 ## Usage:
 
 1. Modify the redis settings in lua/appConfig.lua, the defaults are localhost and 6379.
 
-2. Start the app by running the shell file ./startup.sh, please modify the execution permission if it can't start.
+2. Start the app by running the shell file ./startup.sh, please modify the execution permission if it can't start. Please refer to OpenResty's documentation for how to start the service if you're using Windows to run OpenResty.
 
 3. Access the url *http://localhost:6699/httpmq/sendMessage?queueName=queue1&message=msg123* to send a message, and access the url *http://localhost:6699/httpmq/getMessage?queueName=queue1* to retrieve messages.
 
