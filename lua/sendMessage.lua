@@ -30,6 +30,24 @@ end
 
 local returnResult = {errorCode="00", errorMessage="", returnObject=""}
 
+-- parameter checking
+
+if not args.queueName then
+	returnResult["errorCode"] = "04"
+	returnResult["errorMessage"] = "No queueName parameter."
+   ngx.say(cjson.encode(returnResult))
+	return
+end
+
+if not args.message then
+	returnResult["errorCode"] = "05"
+	returnResult["errorMessage"] = "No message parameter."
+   ngx.say(cjson.encode(returnResult))
+	return
+end
+
+-- end of parameter checking
+
 local res, err = red:rpush(args.queueName, args.message)
 if not res then
 	returnResult["errorCode"] = "02"

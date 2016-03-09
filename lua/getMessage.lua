@@ -31,6 +31,17 @@ end
 
 local returnResult = {errorCode="00", errorMessage="", returnObject=""}
 
+-- parameter checking
+
+if not args.queueName then
+   returnResult["errorCode"] = "04"
+   returnResult["errorMessage"] = "No queueName parameter."
+   ngx.say(cjson.encode(returnResult))
+   return
+end
+
+-- end of parameter checking
+
 local res, err = red:lpop(args.queueName)
 if not res then
 	returnResult["errorCode"] = "01"
