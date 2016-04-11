@@ -4,12 +4,12 @@
 
 1. OpenResty has been installed under /usr/local/openresty, please refer to http://www.openresty.org/ for details.
 
-2. Redis has been installed and without authentication settings.
+2. Redis has been installed.
 
 
 ## Usage:
 
-1. Modify the redis settings in lua/appConfig.lua, the defaults are localhost and 6379.
+1. Modify the redis settings in lua/appConfig.lua, the defaults are localhost and 6379, and Redis doesn't require password.
 
 2. Start the app by running the shell file ./startup.sh, please modify the execution permission if it can't start. Please refer to OpenResty's documentation for how to start the service if you're using Windows to run OpenResty.
 

@@ -13,9 +13,18 @@ local ok, err = red:connect(config["redis_host"], config["redis_port"])
 if not ok then
    -- ngx.say("failed to connect: ", err)
 	returnResult["errorCode"] = "01"
-	returnResult["errorMessage"] = "failed to connect: " .. err
+	returnResult["errorMessage"] = "Failed to connect: " .. err
    ngx.say(cjson.encode(returnResult))
    return
+end
+
+-- check if needs authentication
+if config["redis_require_auth"] == 'Y' then
+	ok,err = red:auth(config["redis_auth_pass"])
+	if not ok then
+		ngx.say(cjson.encode(utils.getReturnResult("06","Failed to authenticate: " .. err )))
+		return
+	end
 end
 
 local cjson = require "cjson"
@@ -71,4 +80,3 @@ if not ok then
 	returnResult["errorMessage"] = "failed to set keepalive: " .. err
    return
 end
-
